@@ -101,7 +101,7 @@
 
 
 ## 🎞 페이지 소개 
-❗️❗️ [자세히 보러가기 Link]
+❗️❗️ [시연동영상 보러가기 👇 click]
 
 [![유튜브 링크](https://img.youtube.com/vi/4FsPCzRyZ-Y/0.jpg)](https://www.youtube.com/watch?v=4FsPCzRyZ-Y) 
 
