@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.chat.model.dao.ChattingDao">
+	<resultMap type="chattingRoomDto" id="chatRoomBasic">
+		<result column="roomId"  property="roomId"/>
+		<result column="name"  property="name" />
+		<result column="sender"  property="sender" />
+		<result column="receiver"  property="receiver" />
+		<result column="item_no" property="itemNo"/>
+		<result column="sender_delete"  property="senderDelete"  />
+		<result column="receiver_delete"  property="receiverDelete"  />
+	</resultMap>
+	
+	<resultMap type="chattingMessageDto" id="chatMessageBasic">
+		<result column="roomId"  property="roomId"  />
+		<result column="sender"  property="sender"  />
+		<result column="message"  property="message"  />
+		<result column="chat_date"  property="messageDate"  />
+	</resultMap>
+	
+	<select id="selectAllRoom" resultMap="chatRoomBasic">
+		select * from chatRoom
+	</select>
+	
+	<select id="findRoomById" parameterType="String" resultMap="chatRoomBasic">
+		select * from chatroom where roomId = #{roomId}
+	</select>
+	
+	<select id="selectRoomBeforeCreate" parameterType="chattingRoomDto" resultMap="chatRoomBasic">
+		select * from chatroom
+		where sender = #{sender} and receiver = #{receiver} and item_no = #{itemNo}
+	</select>
+	<!-- Sender, Receiver, ItemNo으로 RoomId를 가져오는 것 -->
+	<select id="selectRoomIdBySRI" parameterType="chattingRoomDto" resultType="String">
+		select roomId from chatroom where sender = #{sender} and receiver = #{receiver} and item_no = #{itemNo}
+	</select>
+	
+	<insert id="insert" parameterType="chattingRoomDto">
+		insert into chatRoom(roomId, name, sender, receiver, item_no) 
+		values(#{roomId}, #{name}, #{sender}, #{receiver}, #{itemNo})
+	</insert>
+	
+	<insert id="insertMessage" parameterType="chattingMessageDto">
+		insert into chatmessage(roomId, sender, receiver, message, chat_date)
+		values(#{roomId}, #{sender}, #{receiver}, #{message}, #{messageDate})
+	</insert>
+	
+	<select id="bringPrevMessage" parameterType="Map" resultMap="chatMessageBasic">
+		select * from chatmessage
+		where roomId = #{roomId} and chat_date &gt;= DATE_SUB(NOW(), INTERVAL 30 MINUTE)
+	</select>
+	
+	<select id="findAllPrevChatMessage" parameterType="String" resultMap="chatMessageBasic">
+		select * from chatmessage where roomId = #{roomId}
+	</select>
+	
+	<select id="findAllRoomByUserId" parameterType="String" resultMap="chatRoomBasic">
+		select c.*, e.name 
+		from chatroom c join estate_item e
+		on c.item_no = e.item_no
+		where receiver = #{userId} and receiver_delete = 0
+	</select>
+	<select id="findAllRoomByUserIdSender" parameterType="String" resultMap="chatRoomBasic">
+		select * from chatroom where sender = #{sender} and sender_delete = 0
+	</select>
+	
+	<select id="findUserRole" parameterType="String" resultType="String">
+		select user_role from user where user_id = #{userId}
+	</select>
+	
+	<update id="updateRoomCauseDeleteFromSender" parameterType="String">
+		update chatroom set sender_delete = 1 where roomId = #{roomId}
+	</update>
+	<update id="updateRoomCauseDeleteFromReceiver" parameterType="String">
+		update chatroom set receiver_delete = 1 where roomId = #{roomId}
+	</update>
+	
+	<select id="findAllRoomByUserIdReceiverOrSender" parameterType="String">
+		 select * from chatroom where receiver = #{userId} or sender = #{userId}
+	</select>
+	
+	<delete id="deleteRoom" parameterType="String">
+		delete from chatroom where roomId = #{roomId}
+	</delete>
+	
+	<select id="selectEstateNameByItemNo" parameterType="Integer" resultType="String">
+		select name from estate_item
+		where item_no = #{itemNo}
+	</select>
+</mapper>

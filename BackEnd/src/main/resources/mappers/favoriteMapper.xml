@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.ssafy.happyhouse.user.model.dao.FavoriteDao">
+	<resultMap type="FavoriteDto" id="favorite">
+		<id column="favorite_no" property="favoriteNo" />
+		<result column="user_id" property="userId" />
+		<result column="item_no" property="itemNo" />
+		<result column="item_type" property="itemType" />
+		<result column="regist_date" property="registDate" />
+	</resultMap>
+	<resultMap type="UserImageDto" id="userImage">
+		<result column="original_name" property="originalName" />
+		<result column="fixed_name" property="fixedName" />
+		<result column="save_folder" property="saveFolder" />
+		<result column="file_no" property="file_no" />
+	</resultMap>
+
+	<insert id="addFavorite" parameterType="FavoriteDto">
+		insert into
+		favorite_item(user_id, item_no, item_type)
+		values(#{userId}, #{itemNo},
+		#{itemType})
+	</insert>
+
+	<select id="findFavoriteByItemAndUserId"
+		parameterType="FavoriteDto" resultMap="favorite">
+		select * from favorite_item
+		where user_id = #{userId} and item_no = #{itemNo}
+	</select>
+	
+	<select id="findAllUserFavoriteByUserId" parameterType="String" resultMap="favorite">
+		select * from favorite_item where user_id = #{userId}
+	</select>
+
+	<delete id="deleteFavorite" parameterType="FavoriteDto">
+		delete from
+		favorite_item where user_id = #{userId} and favorite_no = #{favoriteNo}
+	</delete>
+
+	<select id="findAllUserFavorite" parameterType="String"
+		resultType="HouseInfo">
+		select e.*, f.* from
+		estate_item e join (
+		select * from
+		favorite_item where user_id = #{userId}
+		) f
+		on e.item_no = f.item_no;
+	</select>
+
+	<select id="findApartImage" parameterType="HouseInfo"
+		resultMap="userImage">
+		select * from file_info
+		where file_no = #{file_no}
+	</select>
+
+	<delete id="deleteAllFavoriteItem" parameterType="String">
+		delete from
+		favorite_item where user_id = #{userId}
+	</delete>
+
+	<select id="selectAllFavoriteItemByItemNo"
+		parameterType="Integer" resultMap="favorite">
+		select * from favorite_item where
+		item_no = #{itemNo}
+	</select>
+
+	<update id="updateFavoriteItemsCauseDelete"
+		parameterType="java.util.List">
+		<foreach collection="list" item="favoriteDto" separator=";">
+			update favorite_item set item_no = -1 where item_no =
+			#{favoriteDto.itemNo}
+		</foreach>
+	</update>
+
+</mapper>

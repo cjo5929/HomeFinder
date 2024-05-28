@@ -1,0 +1,676 @@
+@font-face {
+  font-family: 'maru';
+  src: url('/public/font/MaruBuri-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: 'GmarketSansMedium';
+}
+
+body {
+  background-color: #ebf3f4;
+}
+
+/* main page 관련 css start */
+/* main page 관련 css start */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 60px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+  height: 300px;
+}
+
+.slides img {
+  object-fit: cover;
+  display: none;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.slides img.active {
+  display: block;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.pagination span {
+  width: 10px;
+  height: 10px;
+  background-color: gray;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.pagination span.active {
+  background-color: blue;
+}
+
+.main-content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.section {
+  flex: 1;
+  margin: 0 10px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 250px; /* 모든 섹션의 높이를 동일하게 설정 */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* 상단 정렬 */
+  transition: transform 0.2s; /* 마우스 오버 애니메이션 */
+  cursor: pointer; /* 클릭 가능하게 포인터 추가 */
+}
+
+.section:hover {
+  transform: translateY(-5px); /* 마우스 오버 시 살짝 위로 이동 */
+}
+
+.calendar-section {
+  background-color: #a0deff;
+}
+
+.announcement-section {
+  background-color: #a0deff;
+}
+
+.section h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  margin-top: 0; /* 상단 여백 제거 */
+}
+
+.section p {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.section img {
+  width: 50px;
+  height: 50px;
+}
+
+.recent-announcements {
+  background-color: #a0deff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  overflow: hidden;
+}
+
+.recent-announcements h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.recent-announcements ul {
+  list-style: none;
+  padding: 0;
+}
+
+.recent-announcements ul li {
+  font-size: 1em;
+  margin-bottom: 5px;
+}
+
+.recent-announcements ul li .type {
+  font-weight: bold;
+}
+
+.recent-announcements ul li a {
+  color: blue;
+  text-decoration: underline;
+}
+
+.news-list-title {
+  font-size: 2em;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.card-slider {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.nav-button {
+  background-color: #5bbaf1;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cards {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 10px;
+}
+
+.card {
+  flex: 1 0 30%;
+  margin: 0 10px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border-radius: 10px;
+  height: 500px; /* 모든 카드의 높이를 동일하게 설정 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+}
+
+.see-more-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.loading {
+  background-color: #ebf3f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px; /* 필요에 따라 높이 조정 가능 */
+}
+
+.announcement-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  margin: 10px 0;
+  text-align: left; /* 왼쪽 정렬 */
+  word-wrap: break-word; /* 단어가 길 경우 줄 바꿈 */
+  white-space: pre-wrap; /* 줄바꿈을 유지하고, 긴 단어를 줄 바꿈 */
+}
+
+.announcement-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.announcement-date {
+  font-size: 14px;
+  color: #666;
+}
+
+.view-all {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.view-all a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.view-all a:hover {
+  text-decoration: underline;
+}
+/* main page 관련 css end */
+
+/* house 관련 css Strat */
+
+.info-container {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.select-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.tab.active {
+  background-color: #e9ecef;
+}
+
+.tab span {
+  margin-left: 10px;
+}
+
+.apt-search {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.apt-image {
+  display: block;
+  margin: 0 auto;
+  width: 400px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.detail-info {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.detail-info p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.deal-list {
+  margin-top: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.table th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.table tbody tr:hover {
+  background-color: #e9ecef;
+}
+/* 
+  그래프 css
+*/
+
+.deal-chart {
+  margin-top: 20px;
+  height: 400px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+/* 지도 카테고리*/
+.map_wrap,
+.map_wrap * {
+  margin: 0;
+  padding: 0;
+  font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+  font-size: 12px;
+}
+.map_wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+#category {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border-radius: 5px;
+  border: 1px solid #909090;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  background: #fff;
+  overflow: hidden;
+  z-index: 2;
+}
+#category li {
+  float: left;
+  list-style: none;
+  width: 60px;
+  height: 60px;
+  border-right: 1px solid #acacac;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+#category li:hover {
+  background: #ffe6e6;
+  border-left: 1px solid #acacac;
+  margin-left: -1px;
+}
+#category li:last-child {
+  margin-right: 0;
+  border-right: 0;
+}
+#category li img {
+  display: block;
+  margin: 0 auto;
+  width: 40px;
+  height: 40px;
+}
+#category li span {
+  display: block;
+  margin-top: 5px;
+}
+#category li.on {
+  background: #eee;
+}
+.placeinfo_wrap {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 300px;
+}
+.placeinfo {
+  position: relative;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  background: #fff;
+}
+.placeinfo:nth-of-type(n) {
+  border: 0;
+  box-shadow: 0px 1px 2px #888;
+}
+.placeinfo_wrap .after {
+  content: '';
+  position: relative;
+  margin-left: -12px;
+  left: 50%;
+  width: 22px;
+  height: 12px;
+  background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png');
+}
+.placeinfo a,
+.placeinfo a:hover,
+.placeinfo a:active {
+  color: #fff;
+  text-decoration: none;
+}
+.placeinfo a,
+.placeinfo span {
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.placeinfo span {
+  margin: 5px 5px 0 5px;
+  cursor: default;
+  font-size: 13px;
+}
+.placeinfo .title {
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 6px 6px 0 0;
+  margin: -1px -1px 0 -1px;
+  padding: 10px;
+  color: #fff;
+  background: #d95050;
+  background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px
+    center;
+}
+.placeinfo .tel {
+  color: #0f7833;
+}
+
+/* 지도 카테고리 END */
+
+/* 지도지표 토글 */
+.toggle-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 8px 16px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+/* house 관련 css END */
+
+/* HouseSurface css Start*/
+.selection-panel {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.selection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.selection-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+
+.selection-item.active {
+  background-color: #e9ecef;
+}
+
+.selection-item span {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.query-button {
+  margin-top: 20px;
+  padding: 10px;
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.query-button:hover {
+  background-color: #0056b3;
+}
+
+.level-indicator {
+  padding-top: 30px; /* 조회 버튼과의 여백 */
+}
+
+.level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px; /* 각 레벨의 높이 조정 */
+  color: white;
+  font-weight: bold;
+}
+
+.level-1 {
+  background-color: rgb(207, 236, 254);
+}
+
+.level-2 {
+  background-color: rgb(155, 211, 246);
+}
+
+.level-3 {
+  background-color: rgb(103, 187, 239);
+}
+
+.level-4 {
+  background-color: rgb(51, 162, 231);
+}
+
+.level-5 {
+  background-color: rgb(0, 138, 224);
+}
+/* HouseSurface css END*/
+
+/* 달력 CSS */
+.calendar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.day-header {
+  padding: 20px 0;
+}
+
+.day-cell {
+  border: 1px solid #dee2e6;
+  min-height: 200px; /* 셀의 최소 높이를 200px로 증가 */
+  padding: 10px;
+  flex: 1;
+  overflow: hidden; /* 내용이 넘칠 경우 숨기기 */
+}
+
+.week {
+  display: flex;
+}
+
+.badge-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.event-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.event-detail {
+  padding: 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.card-header {
+  background-color: #5bbaf1;
+  color: white;
+}
+
+.card-title {
+  margin-bottom: 0;
+}
+
+.btn-close {
+  color: white;
+}
+
+.form-check-label {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.event-detail {
+  margin-bottom: 30px;
+}
+/* 달력 CSS END */
+
+/* 공지사항 css */
+
+/* 공지사항 css END */

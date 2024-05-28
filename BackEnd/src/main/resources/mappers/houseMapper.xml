@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.house.model.dao.HouseDao">
+
+
+	<!-- 아파트 코드로 매물 리스트 조회 -->
+	<select id="getHouseDealListByAptCode" parameterType="int"
+		resultType="HouseDeal">
+		SELECT a.id as dealId,
+		a.apt_id as aptCode,
+		a.price as
+		dealAmount,
+		CONCAT(a.year, '-', LPAD(a.month, 2, '0'), '-', a.day) as
+		dealDate,
+		a.area as exclusiveArea,
+		a.floor
+		FROM apt_deal a
+		WHERE a.apt_id
+		= #{aptCode}
+		ORDER BY dealDate DESC
+	</select>
+
+	<!-- 아파트 정보 상세 -->
+	<select id="getAptInfoDetailByAptCode" parameterType="int"
+		resultType="map">
+		SELECT a.apt_id as aptCode,
+		a.name as apartmentName,
+		a.built_year as buildYear,
+		a.lng,
+		a.lat,
+		CONCAT(d.sido_name, ' ',
+		d.gugun_name, ' ', d.dong_name, ' ',a.jibun) as roadName,
+		a.dong_code
+		as dongCode,
+		(SELECT COUNT(*) FROM apt_deal WHERE apt_id = a.apt_id) as
+		dealCount
+		FROM apt_info a
+		JOIN dongcode d ON a.dong_code = d.dong_code
+		WHERE
+		a.apt_id = #{aptCode}
+	</select>
+
+	<!-- 이름으로 조회 -->
+	<select id="getHouseListByName" parameterType="string"
+		resultType="map">
+		SELECT apt_id as aptCode,
+		name as apartmentName,
+		lat,
+		lng,
+		dong_code as dongCode
+		FROM apt_info
+		WHERE MATCH(name)
+		AGAINST('+${apartmentName}*' IN BOOLEAN MODE)
+	</select>
+
+	<!-- 주소로 아파트 목록 조회 -->
+	<select id="getApartListByAddressName"
+		parameterType="AddressName" resultType="MapMarkerInfo">
+		SELECT b.apt_id as aptCode,
+		b.name as apartmentName, b.lng, b.lat
+		FROM apt_info b
+		JOIN dongcode d ON
+		b.dong_code = d.dong_code
+		WHERE d.gugun_name = #{gugunName} AND
+		d.dong_name = #{dongName}
+	</select>
+
+	<!-- 동코드로 아파트 리스트 얻기 -->
+	<select id="getApartNameByDongCode" parameterType="String"
+		resultType="HouseInfo">
+		select * from apt_info where dong_code = #{dongCode}
+		order
+		by name
+	</select>
+
+	<!-- 위경도로 아파트 리스트 얻기 -->
+	<select id="getHouseListByLatLng" parameterType="map"
+		resultType="HouseDeal">
+    <![CDATA[
+    SELECT a.id as aptCode,
+           a.name as apartmentName,
+           a.price as dealAmount,
+           a.built_year as buildYear,
+           CONCAT(a.year, '-', LPAD(a.month, 2, '0'), '-', a.day) as dealDate,
+           CONCAT(d.sido_name, ' ', d.gugun_name, ' ', d.dong_name) as roadName,
+           a.dong_code as dongCode,
+           a.area as exclusiveArea,
+           a.jibun,
+           a.floor
+      FROM apt_deal a
+      JOIN dongcode d ON a.dong_code = d.dong_code
+     WHERE ST_DISTANCE_SPHERE(POINT(b.lng, b.lat), POINT(#{lon}, #{lat})) <= 100
+     ORDER BY dealDate DESC
+    ]]>
+	</select>
+
+	<!-- 아파트 상세 -->
+	<select id="getHouseDetailByAptCode" parameterType="int"
+		resultType="map">
+		SELECT a.id as aptCode,
+		a.name as apartmentName,
+		a.built_year as buildYear,
+		b.lng,
+		b.lat,
+		a.price as dealAmount,
+		a.year as
+		dealYear,
+		a.month as dealMonth,
+		a.day as dealDay,
+		a.floor,
+		CONCAT(a.jibun) as jibunjuso,
+		CONCAT(d.sido_name, ' ', d.gugun_name, '
+		', d.dong_name) as dorojuso,
+		CONCAT(a.year, '-', LPAD(a.month, 2, '0'),
+		'-', a.day) as dealDate,
+		a.area as exclusiveArea
+		FROM apt_deal a
+		JOIN
+		apt_info b ON a.apt_id = b.apt_id
+		JOIN dongcode d ON b.dong_code =
+		d.dong_code
+		WHERE a.id = #{aptCode}
+		ORDER BY dealDate DESC
+	</select>
+
+
+
+	<!-- 시/도 목록 조회 -->
+	<select id="findSidoList" resultType="string">
+		SELECT DISTINCT sido_name
+		FROM dongcode
+		ORDER BY sido_name
+	</select>
+
+	<!-- 구/군 목록 조회 -->
+	<select id="findGugunList" parameterType="string"
+		resultType="string">
+		SELECT DISTINCT gugun_name
+		FROM dongcode
+		WHERE sido_name =
+		#{sidoName}
+		ORDER BY gugun_name
+	</select>
+
+	<!-- 동 목록 조회 -->
+	<select id="findDongList" parameterType="map"
+		resultType="string">
+		SELECT DISTINCT dong_name
+		FROM dongcode
+		WHERE sido_name =
+		#{sidoName} AND gugun_name = #{gugunName}
+		ORDER BY dong_name
+	</select>
+
+	<!-- 안전 점수 리스트 조회 -->
+	<select id="getSafetyScoreList"
+		resultType="com.ssafy.happyhouse.house.model.dto.SafetyScore">
+		SELECT sido AS sido,
+		gugun AS gugun,
+		traffic_accidents AS
+		trafficAccidents,
+		total_reports AS totalReports,
+		population AS
+		population,
+		police_stations AS policeStations,
+		cctv_count AS cctvCount,
+		safety_score AS safetyScore,
+		dong_code AS dongCode
+		FROM safety_scores
+	</select>
+	<!-- 인구수 리스트 조회 -->
+
+	<resultMap id="PopulationDataResultMap"
+		type="PopulationDataDTO">
+		<result property="gugun" column="gugun" />
+		<result property="count" column="count" />
+		<result property="dongCode" column="dong_code" />
+	</resultMap>
+
+	<select id="getPopulationList"
+		resultMap="PopulationDataResultMap">
+		SELECT * FROM population_data
+	</select>
+
+	<!-- 교육 리스트 조회 -->
+
+	<resultMap id="EducationDataResultMap"
+		type="EducationDataDTO">
+		<result property="gugun" column="gugun" />
+		<result property="count" column="count" />
+		<result property="dongCode" column="dong_code" />
+	</resultMap>
+
+	<select id="getEducationList" resultMap="EducationDataResultMap">
+		SELECT * FROM
+		education_data
+	</select>
+
+	<!-- 편의시설 리스트 조회 -->
+
+	<resultMap id="FacilitiesDataResultMap"
+		type="FacilitiesDataDTO">
+		<result property="gugun" column="gugun" />
+		<result property="count" column="count" />
+		<result property="dongCode" column="dong_code" />
+	</resultMap>
+
+	<select id="getFacilitiesList"
+		resultMap="FacilitiesDataResultMap">
+		SELECT * FROM facilities_data
+	</select>
+
+
+	<!-- 매물 등록 -->
+
+	<!-- 청약 Apt 정보 조회 -->
+
+	<!-- apply_home 테이블에서 특정 월의 데이터를 조회 -->
+	<select id="getApplyHomeDataByMonth" parameterType="map"
+		resultType="ApplyHome">
+		SELECT * FROM apply_home
+		WHERE
+		DATE_FORMAT(RCEPT_BGNDE,'%Y-%m') = #{yearMonth}
+	</select>
+
+
+
+</mapper>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.user.model.dao.EstateDao">
+	<resultMap id="houseInfoResultMap"
+		type="com.ssafy.happyhouse.house.model.dto.HouseInfo">
+		<result property="apt_id" column="apt_id" />
+		<result property="built_year" column="built_year" />
+		<result property="dong_code" column="dong_code" />
+		<result property="dong_name" column="dong_name" />
+		<result property="jibun" column="jibun" />
+		<result property="name" column="name" />
+		<result property="lat" column="lat" />
+		<result property="lng" column="lng" />
+		<result property="floor" column="floor" />
+		<result property="area" column="area" />
+		<result property="room" column="room" />
+		<result property="bath" column="bath" />
+		<result property="info" column="info" />
+		<result property="price" column="price" />
+		<result property="address" column="address" />
+		<result property="entrance" column="entrance" />
+		<result property="heater" column="heater" />
+		<result property="move_in" column="move_in" />
+		<result property="user_id" column="user_id" />
+		<result property="file_no" column="file_no" />
+		<result property="item_no" column="item_no"/>
+		<result property="type" column="type" />
+		<association property="image"
+			javaType="com.ssafy.happyhouse.user.model.dto.UserImageDto">
+			<result property="originalName" column="original_name" />
+			<result property="fixedName" column="fixed_name" />
+			<result property="saveFolder" column="save_folder" />
+			<result property="type" column="type" />
+		</association>
+	</resultMap>
+
+
+	<resultMap type="UserImageDto" id="UserImageBasic">
+		<result property="originalName" column="original_name" />
+		<result property="fixedName" column="fixed_name" />
+		<result property="saveFolder" column="save_folder" />
+		<result property="type" column="type" />
+	</resultMap>
+
+
+	<select id="selectFileNo" parameterType="HouseInfo"
+		resultType="Integer">
+		select file_no from file_info
+		where user_id = #{user_id}
+		order by file_no desc
+		limit 1
+	</select>
+	<select id="selectItemNo" resultType="Integer">
+		select item_no from estate_item
+		order by item_no desc
+		limit 1
+	</select>
+	
+	<select id="selectFileInfoByFileNo" parameterType="Integer" resultMap="UserImageBasic">
+		select * from file_info where file_no = #{file_no}
+	</select>
+
+	<select id="selectAllEstateItem" parameterType="String">
+		select * from
+		estate_item
+		where user_id = #{user_id}
+	</select>
+	
+	<select id="selectAllEstateItemByAptCode" parameterType="Integer" resultType="HouseInfo">
+		select * from estate_item where apt_id = #{apt_code}
+	</select>
+
+	<select id="selectAllEstateImage" parameterType="String"
+		resultMap="UserImageBasic">
+		select * from file_info
+		where user_id = #{user_id} and type
+		not in ("profile")
+	</select>
+
+
+	<insert id="insertApart" parameterType="HouseInfo">
+		insert into estate_item
+		(user_id, apt_id, file_no, name, price, address, dong_code, dong_name,
+		floor,	area, room, bath, info, type, move_in, heater, entrance)
+		values
+		(#{user_id}, #{apt_id},
+		#{file_no}, #{name},
+		#{price}, #{address}, #{dong_code}
+		,#{dong_name},
+		#{floor}, #{area},
+		#{room}, #{bath}, #{info}, #{type}, #{move_in}, #{heater}, #{entrance})
+	</insert>
+	<insert id="insertApartImage" parameterType="HouseInfo">
+		insert into
+		file_info(user_id, original_name, fixed_name, save_folder, type)
+		values(#{user_id}, #{image.originalName}, #{image.fixedName},
+		#{image.saveFolder}, #{type})
+	</insert>
+	
+	<select id="findFileNoByItemNo" parameterType="Integer" resultType="Integer">
+		select file_no from estate_item where item_no = #{itemNo}
+	</select>
+	
+	<delete id="deleteApart" parameterType="Integer">
+		delete from estate_item where item_no = #{itemNo}
+	</delete>
+	
+	<delete id="deleteApartImage" parameterType="Integer">
+		delete from file_info where file_no = #{fileNo}
+	</delete>
+	
+	<delete id="deleteAllUserItem" parameterType="String">
+		delete from estate_item where user_id = #{userId}
+	</delete>
+	
+	<select id="findAllEstateItemByUserId" parameterType="String" resultMap="houseInfoResultMap">
+		select * from estate_item where user_id = #{userId}
+	</select>
+	
+	<select id="findHouseInfoByItemNo" parameterType="Integer" resultMap="houseInfoResultMap">
+		select * from estate_item where item_no = #{itemNo}
+	</select>
+	
+	<update id="updateEstateImage" parameterType="userImageDto">
+		update file_info set original_name = #{originalName}, fixed_name = #{fixedName}, save_folder = #{saveFolder}
+		, type = #{type} where file_no = #{file_no}
+	</update>
+	<select id="selectEstateImageByFileNo" parameterType="Integer" resultMap="UserImageBasic">
+		select * from file_info where file_no = #{fileNo}
+	</select>
+	<update id="updateEstateInfo" parameterType="houseInfo">
+    update estate_item 
+    set address = #{address}, 
+        room = #{room}, 
+        floor = #{floor}, 
+        area = #{area},
+        bath = #{bath}, 
+        heater = #{heater}, 
+        entrance = #{entrance}, 
+        price = #{price} 
+    where item_no = #{item_no}
+</update>
+</mapper>
