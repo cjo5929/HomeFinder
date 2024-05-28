@@ -108,25 +108,36 @@
 <br/>
 
 #### - 메인페이지 <br/>
+* 네이버 뉴스 API를 활용하여 실시간 뉴스 정보 + 헤더이미지 크롤링
 <img width="80%" src="https://github.com/cjo5929/HomeFinder/assets/90138160/cfc12f45-5b31-4a8d-b956-c0413ec86efa"/>
 <br/>
 <img width="80%" src="https://github.com/cjo5929/HomeFinder/assets/90138160/e8deabd7-6335-4155-ac01-0350662fdbe2"/>
 <br/>
 
 #### - 매물 검색페이지 <br/>
+* 동, 건물명 중 원하는 카테고리에서 매물 검색
+* 매물 상세보기(로드뷰, 년도별 거래금액 그래프)
+* 상담 가능 매물를 통한 찜 등록, 실시간 채팅 가능 
 <img src="https://github.com/cjo5929/HomeFinder/assets/90138160/050963a9-de4a-403c-b3ce-ae61168fcd06">
 <img src="https://github.com/cjo5929/HomeFinder/assets/90138160/83599b04-9620-40b1-876a-bcb047d337e2">
+<img src="https://github.com/cjo5929/HomeFinder/assets/90138160/ce65128c-4779-45d0-9261-b7aadc22a1ef
+">
+
 <br/>
 
 #### - 지도 통계페이지 <br/>
+* 치안, 인구밀집, 편의시설, 교육 5가지 카테고리 중 등급 별 폴리곤 표시
 <img src="https://github.com/cjo5929/HomeFinder/assets/90138160/fab2dbd1-3106-4821-9411-fe30446755f1">
 <br/>
 
 #### - 채팅페이지 <br/>
+* 중개업자와 일반 사용자 별 실시간 소통 기능
 <img src="https://github.com/cjo5929/HomeFinder/assets/90138160/4d954751-4113-4f1e-b7b0-9c6f0a33c950">
 <br/>
 
 #### - 청약페이지 <br/>
+* 모집공고일 기준 청약 예정 매물 달력에 표시, 청약 정보 상세보기
+* 가점 계산기를 통해 나온 점수, 사용자 데이터를 통한 AI 당첨 예측
 <img src="https://github.com/cjo5929/HomeFinder/assets/90138160/659717a8-77b5-40cb-a41c-93ff8cc1a023">
 <img src="https://github.com/cjo5929/HomeFinder/assets/90138160/f5d04094-a23c-4c9b-8384-0e4e3b203be5">
 <br/>
