@@ -3,37 +3,31 @@
 <br/>
 
 ## 💡 프로젝트 개요
-- 삼성청년SW아카데미 - 1학기 HappyHouse 관통 프로젝트
-- 공공 데이터를 활용한 주택거래정보, 청약 정보 검색 사이트 
+- 삼성청년SW아카데미 - 1학기 부동산 관통 프로젝트
+- 공공 데이터를 활용한 아파트거래정보, 청약 정보 검색 사이트 
 
-<img width="80%" src="https://user-images.githubusercontent.com/59682953/122520554-b3f2ea80-d04e-11eb-9de4-8440ed9fb7eb.jpg"/>
+<img width="80%" src="https://github.com/cjo5929/HomeFinder/assets/90138160/cfc12f45-5b31-4a8d-b956-c0413ec86efa"/>
 <br/>
 
 ## 📆  프로젝트 기간 & 팀원
 
-- 2024년 5월 13일 - 2024년 5월 24일 (2)
+- 2024년 5월 13일 - 2024년 5월 24일 (2주)
 - 강민서 (팀장), 임동길 (팀원)
 <br/>
 
 ## ⚙️ 기술 스택
-<p align="center">
-  <img src="https://img.shields.io/badge/API-Google_Map-red?style=flat">&nbsp  
-  <img src="https://img.shields.io/badge/API-Naver_News-skyblue?style=flat">&nbsp 
-  <img src="https://img.shields.io/badge/Library-Spring_Bootstrap-563D7C?style=flat&logo=bootstrap">&nbsp 
-  <img src="https://img.shields.io/badge/Language-Java_11-007396?style=flat&logo=java&logoColor=white">&nbsp 
-  <img src="https://img.shields.io/badge/Language-JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=white">&nbsp 
-  <img src="https://img.shields.io/badge/Database-MySql-F80000?style=flat&logo=oracle&logoColor=white">&nbsp 
-  <img src="https://img.shields.io/badge/Framework-Vue-D22128?style=flat&logo=apahce&logoColor=white">&nbsp 
-  <img src="https://img.shields.io/badge/Framework-SpringFramework-6DB33F?style=flat&logo=spring&logoColor=white">&nbsp 
-  <img src="https://img.shields.io/badge/Framework-SpringBoot-6DB33F?style=flat&logo=spring&logoColor=white">&nbsp 
-</p>
+[![stackticon](https://firebasestorage.googleapis.com/v0/b/stackticon-81399.appspot.com/o/images%2F1716880676626?alt=media&token=610f336e-8aed-4dc2-9831-6f6cc5fa8f0e)](https://github.com/msdio/stackticon)
+#### 시스템 구성
+<img width="80%" src="https://github.com/cjo5929/HomeFinder/assets/90138160/7ca7b70b-33b6-4324-b9ad-646e28016494"/>
+
 
 ## ⚒ 개발 도구
 
 |도구|버전|설명|
 |:---:|:---:|:---:|
-|STS|3.9.14|Backend+Frontend|
-|VSCode|1.56.2|Frontend|
+|STS|4.21.0|Backend+Frontend|
+|VSCode|1.89.1|Frontend|
+|datagrip|2024.1.2|DB|
 
 ## 🔧 개발 환경
 
@@ -46,6 +40,8 @@
 |Springboot|3.2.5|Backend|
 
 ## 🖥 기능
+<img width="80%" src="https://github.com/cjo5929/HomeFinder/assets/90138160/4e5608c8-c999-493f-9f1a-d6a2602b3d9a"/>
+
 > * 회원관리
 >   * 회원가입
 >   * 로그인
@@ -72,7 +68,7 @@
 >   * 공지사항 검색
 >   * 등록 & 수정 & 삭제
 >   
-> * 아파트 검색
+> * 부동산 실거래
 >   * 검색화면
 >   * 아파트 상세 정보
 >
@@ -89,6 +85,11 @@
 > * 채팅
 >   * 중개업자와 일반 사용자 별 실시간 소통 기능
 >  
+> * 마이페이지
+>   * 유저 정보 CRUD
+>   * 매물 관리 CRUD
+>   * 찜 관리
+>  
 > * 뉴스 리스트
 >   * 매물, 청약과 관련된 뉴스 크롤링
 > 
@@ -98,14 +99,49 @@
 >   * 가점계산기
 >   * 예상 가점, 지역, 나이를 고려한 AI 당첨 예측
 
+
 ## 🎞 페이지 소개 
-❗️❗️ [자세히 보러가기](./Pages)<br/>
-#### - 메인페이지 <br/>
-<img width="50%" src="https://imgur.com/Ma7m1P3.png"> <br/>
-#### - 주택 검색 <br/>
-<img src="https://imgur.com/AuRsa5P.png">
+❗️❗️ [자세히 보러가기 Link]
+
+[![유튜브 링크](https://img.youtube.com/vi/4FsPCzRyZ-Y/0.jpg)](https://www.youtube.com/watch?v=4FsPCzRyZ-Y) 
+
 <br/>
 
-* ## 👩🏻‍💻👩🏻‍💻 개발자
-> 오도경 [https://github.com/dokyeong10] <br/>
-> 이승희 [https://github.com/Seung-hees] <br/>
+#### - 메인페이지 <br/>
+<img width="80%" src="https://github.com/cjo5929/HomeFinder/assets/90138160/cfc12f45-5b31-4a8d-b956-c0413ec86efa"/>
+<br/>
+<img width="80%" src="https://github.com/cjo5929/HomeFinder/assets/90138160/e8deabd7-6335-4155-ac01-0350662fdbe2"/>
+<br/>
+
+#### - 매물 검색페이지 <br/>
+<img src="https://github.com/cjo5929/HomeFinder/assets/90138160/050963a9-de4a-403c-b3ce-ae61168fcd06">
+<img src="https://github.com/cjo5929/HomeFinder/assets/90138160/83599b04-9620-40b1-876a-bcb047d337e2">
+<br/>
+
+#### - 지도 통계페이지 <br/>
+<img src="https://github.com/cjo5929/HomeFinder/assets/90138160/fab2dbd1-3106-4821-9411-fe30446755f1">
+<br/>
+
+#### - 채팅페이지 <br/>
+<img src="https://github.com/cjo5929/HomeFinder/assets/90138160/4d954751-4113-4f1e-b7b0-9c6f0a33c950">
+<br/>
+
+#### - 청약페이지 <br/>
+<img src="https://github.com/cjo5929/HomeFinder/assets/90138160/659717a8-77b5-40cb-a41c-93ff8cc1a023">
+<img src="https://github.com/cjo5929/HomeFinder/assets/90138160/f5d04094-a23c-4c9b-8384-0e4e3b203be5">
+<br/>
+
+
+* ## 👨‍💻👨‍💻개발자
+> 강민서 [https://github.com/cjo5929] 
+<details><summary>역할</summary>
+  <h4> FE/BE </h4>
+<img src="https://github.com/cjo5929/HomeFinder/assets/90138160/906d0855-d7eb-4828-b84f-ca06f6fe9cb8">
+</details>
+<br/>
+
+> 임동길 [https://github.com/LDG12] <br/>
+<details><summary>역할</summary>
+  <h4> FE/BE </h4>
+<img src="https://github.com/cjo5929/HomeFinder/assets/90138160/7ddb3813-0bda-4b24-8974-9f448dd9bfb0">
+</details>
