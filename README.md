@@ -120,8 +120,7 @@
 * 상담 가능 매물를 통한 찜 등록, 실시간 채팅 가능 
 <img src="https://github.com/cjo5929/HomeFinder/assets/90138160/050963a9-de4a-403c-b3ce-ae61168fcd06">
 <img src="https://github.com/cjo5929/HomeFinder/assets/90138160/83599b04-9620-40b1-876a-bcb047d337e2">
-<img src="https://github.com/cjo5929/HomeFinder/assets/90138160/ce65128c-4779-45d0-9261-b7aadc22a1ef
-">
+<img src="https://github.com/cjo5929/HomeFinder/assets/90138160/ce65128c-4779-45d0-9261-b7aadc22a1ef">
 
 <br/>
 
