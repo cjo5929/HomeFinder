@@ -141,6 +141,9 @@
 <img src="https://github.com/cjo5929/HomeFinder/assets/90138160/f5d04094-a23c-4c9b-8384-0e4e3b203be5">
 <br/>
 
+## 📁 ERD
+<img src="https://github.com/cjo5929/HomeFinder/assets/90138160/f8a3bcbf-9e87-4094-b8e3-91802b072bda">
+
 
 * ## 👨‍💻👨‍💻개발자
 > 강민서 [https://github.com/cjo5929] 
