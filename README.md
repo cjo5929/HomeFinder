@@ -9,6 +9,10 @@
 <img width="80%" src="https://github.com/cjo5929/HomeFinder/assets/90138160/cfc12f45-5b31-4a8d-b956-c0413ec86efa"/>
 <br/>
 
+## 🏆 프로젝트 성과
+- 삼성 청년 SW 아카데미 1학기 프로젝트 최우수상 수상
+<br/>
+
 ## 📆  프로젝트 기간 & 팀원
 
 - 2024년 5월 13일 - 2024년 5월 24일 (2주)
